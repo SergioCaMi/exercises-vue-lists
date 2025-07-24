@@ -18,8 +18,8 @@
     <button @click="clearHistory" id="clear-button" class="red">Clear History</button>
 
     <ul id="roll-history">
-    <li v-for="(h, index) in history" :key="index">
-      En la tirada {{ index + 1 }} ha salido el número {{ h }}
+    <li v-for="h in history" :key="h.num">
+      En la tirada {{ h.num }} ha salido el número {{ h.dice }}
     </li>
     </ul>
   </main>
@@ -37,7 +37,7 @@
 
         const roll = () => {
           dice.value = getRandomDiceNumber()
-          history.value.push(dice.value)
+          history.value.push({num: history.value.length + 1, dice: dice.value})
         }
 
         const clearHistory = () => {
