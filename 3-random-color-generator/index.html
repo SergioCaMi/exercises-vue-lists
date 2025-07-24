@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
@@ -52,12 +52,12 @@
   <div id="app">
     <h1>Random Color Generator</h1>
     <div class="center">
-      <button>Add Color</button>
+      <button @click="generate">Add Color</button>
     </div>
     <div class="container">
-      <div class="color-container">
+      <div v-for="(color, index) in colors" :key="index" class="color-container" :style="{ backgroundColor: color }" >
         <!-- Puedes usar tu directva v-for aquí -->
-        <div>#FFFFFF</div>
+        <div >{{color}}</div>
       </div>
     </div>
   </div>
@@ -73,13 +73,21 @@
       }
       return color;
     };
-
-
     createApp({
       setup() {
+        const colors = ref([])
+        const newColor = ref('')
+        const generate = () =>{ 
+          newColor.value = generateHexColor()
+          colors.value.push(newColor.value)
+        }
 
+        return {
+          colors,
+          newColor,
+          generate
 
-        return {};
+        };
       },
     }).mount('#app');
   </script>
